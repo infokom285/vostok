@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Данные из LocalStorage</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .text-style {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="output"></div>
+
+<script>
+    var n = +localStorage.getItem('n');
+    var n2n = null;
+
+    window.onload = function() {
+        var data = localStorage.getItem('containerContent'); // Читаем данные
+        var index = localStorage.getItem('n'); // Читаем индекс
+
+        if (data) {
+            var content = JSON.parse(data); // Парсим JSON
+
+            document.getElementById('output').innerHTML = `
+                <img src="${content.imgSrc || 'default_image.png'}" alt="Изображение">
+                <p class="text-style"><strong>Название:</strong> ${content.text || "Данные отсутствуют"}</p>
+                <p class="text-style"><strong>Описание:</strong> ${content.text1 || "Данные отсутствуют"}</p>
+                <p class="text-style"><strong>Индекс:</strong> ${index}</p>
+
+                <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+                    <button class="button-style" onclick="saveArray2Value()">Выбрать</button>
+                    <button class="button-close" onclick="closePage()">Закрыть</button>
+                </div>
+            `;
+
+            console.log("Данные, загруженные из LocalStorage:", content);
+        } else {
+            document.getElementById('output').innerHTML = "<p style='color:red;'>Нет данных!</p>";
+        }
+    };
+
+    // Функция для сохранения данных при нажатии кнопки "Выбрать"
+    function saveArray2Value() {
+        var n2n = localStorage.getItem('n2n'); // Читаем текущее значение
+        var data = localStorage.getItem('containerContent');
+
+        if (data) {
+            var content = JSON.parse(data);
+            var newEntry = content.text + "|" + content.text1; // Создаем новую запись
+
+            if (n2n) {
+                n2n = newEntry + "|" + n2n; // Добавляем, если уже есть данные
+            } else {
+                n2n = newEntry; // Если нет данных, записываем без лишнего "|"
+            }
+
+            localStorage.setItem('n2n', n2n); // Сохраняем обратно
+            alert('Выбрано: ' + newEntry);
+        } else {
+            alert('Ошибка: нет данных для сохранения.');
+        }
+    }
+
+    // Функция для закрытия страницы
+    function closePage() {
+        window.open('', '_self', '');
+        window.close();
+    }
+</script>
+
+
+</body>
+</html>
+
