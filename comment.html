@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Связаться с нами</title>
+    <title>Написать нам</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,13 +20,13 @@
 
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 800px; /* Увеличено для размещения кнопок в ряд */
             text-align: center;
         }
 
         h2 { font-size: 22px; font-weight: bold; margin-bottom: 20px; }
 
-        /* Общие стили для всех полей ввода */
+        /* Стили полей ввода */
         input[type="text"], select, textarea {
             width: 100%;
             padding: 12px;
@@ -35,49 +35,39 @@
             font-size: 16px;
             box-sizing: border-box;
             outline: none;
-            background-color: #fff;
         }
 
         textarea { height: 100px; resize: none; }
 
-        .buttons {
-            margin-top: 10px;
+        /* Контейнер для кнопок в одну строку */
+        .buttons-row {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 10px;
+            margin-top: 10px;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 15px;
-            cursor: pointer;
-            background-color: #f0f0f0;
-            border: 1px solid #767676;
-            border-radius: 2px;
-        }
-
-        /* Блок мессенджеров */
-        .messenger-box {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px dashed #ccc;
-        }
-
-        .m-btn {
-            display: inline-block;
-            margin: 5px;
-            padding: 10px 18px;
-            text-decoration: none;
-            color: white;
-            border-radius: 4px;
-            font-weight: bold;
+        /* Общие стили кнопок */
+        .btn {
+            padding: 10px 15px;
             font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #767676;
+            text-decoration: none;
+            color: black;
+            background-color: #f0f0f0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
         }
 
-        .wa { background-color: #25D366; }
-        .tg { background-color: #0088cc; }
-
-        button:disabled { opacity: 0.5; }
+        .btn-wa { background-color: #25D366; color: white; border: none; }
+        .btn-tg { background-color: #0088cc; color: white; border: none; }
+        
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -87,33 +77,29 @@
 
         <form id="commentForm">
             <input type="text" name="name" id="userName" placeholder="Ваше имя" required>
-            
             <input type="text" name="contact" placeholder="Ваш телефон, WhatsApp или Telegram" required>
             
             <select name="subject" required>
                 <option value="" disabled selected>Выберите тему обращения</option>
                 <option value="Заказ">📦 Сделать заказ</option>
-                <option value="Вопрос">❓ Вопрос по товару</option>
-                <option value="Ошибка">⚠️ Ошибка в программе</option>
-                <option value="Другое">📝 Другое</option>
+                <option value="Вопрос">❓ Вопрос</option>
+                <option value="Ошибка">⚠️ Ошибка</option>
             </select>
             
             <textarea name="message" id="commentText" placeholder="Введите ваше сообщение..." required></textarea>
 
-            <div class="buttons">
-                <button type="submit" id="submitBtn">Отправить</button>
-                <button type="button" onclick="window.close()">Выход</button>
+            <div class="buttons-row">
+                <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">WhatsApp</a>
+                <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
+                
+                <button type="submit" id="submitBtn" class="btn">Email</button>
+                <button type="button" onclick="window.close()" class="btn">Выход</button>
             </div>
         </form>
-
-        <div class="messenger-box">
-            <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Быстрая связь без почты:</p>
-            <a href="https://wa.me/79000000000" target="_blank" class="m-btn wa">WhatsApp</a>
-            <a href="https://t.me/Alex_2858r" target="_blank" class="m-btn tg">Telegram</a>
-        </div>
     </div>
 
     <script>
+        // Автозаполнение имени из localStorage
         document.addEventListener("DOMContentLoaded", () => {
             const savedName = localStorage.getItem('username');
             if (savedName) document.getElementById('userName').value = savedName;
@@ -137,17 +123,16 @@
                 });
 
                 if (response.ok) {
-                    alert("Сообщение успешно отправлено!");
-                    window.close(); 
+                    alert("Сообщение отправлено!");
+                    window.close();
                 } else {
-                    alert("Ошибка. Попробуйте написать в мессенджеры.");
+                    alert("Ошибка отправки.");
                     submitBtn.disabled = false;
-                    submitBtn.innerText = "Отправить";
+                    submitBtn.innerText = "Email";
                 }
             } catch (error) {
-                alert("Нет связи с сервером.");
+                alert("Ошибка сети.");
                 submitBtn.disabled = false;
-                submitBtn.innerText = "Отправить";
             }
         };
     </script>
