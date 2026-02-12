@@ -107,16 +107,42 @@
     let array4 = [];
 
     function loadCart() {
+        // 1. Загружаем уже существующую корзину
         const stored = localStorage.getItem('array4');
         array4 = stored ? JSON.parse(stored) : [];
         
+        // 2. Берем очередь новых товаров из n2n
         let n2n = localStorage.getItem('n2n');
+        
         if (n2n && n2n !== 'null') {
             let parts = n2n.split('|');
-            if (parts.length >= 2) {
-                // Просто добавляем в конец массива, не проверяя на дубликаты
-                array4.push(parts[0].trim(), "1", parts[1].trim());
+            
+            // Проходим по всем парам (Название | Цена) из n2n
+            for (let i = 0; i < parts.length; i += 2) {
+                if (parts[i] && parts[i+1]) {
+                    let newName = parts[i].trim();
+                    let newPrice = parts[i+1].trim();
+                    
+                    let found = false;
+                    // Проверяем, есть ли такой товар уже в array4
+                    for (let j = 0; j < array4.length; j += 3) {
+                        if (array4[j] === newName) {
+                            // Если нашли, увеличиваем количество на 1
+                            let currentQty = parseInt(array4[j+1]);
+                            array4[j+1] = String(currentQty + 1);
+                            found = true;
+                            break;
+                        }
+                    }
+                    
+                    // Если товар новый (не нашли в цикле), добавляем в конец
+                    if (!found) {
+                        array4.push(newName, "1", newPrice);
+                    }
+                }
             }
+            
+            // 3. После обработки всей очереди очищаем n2n
             localStorage.removeItem('n2n');
             saveCart();
         }
