@@ -262,7 +262,27 @@
     }
 
     document.addEventListener("DOMContentLoaded", loadCart);
-</script>
 
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Получаем имя из памяти браузера
+    const savedName = localStorage.getItem('username') || "Не указано";
+
+    // 2. Если у вас в корзине есть элемент, где должно быть имя (например, <span id="clientName"></span>)
+    const nameDisplay = document.getElementById("clientName");
+    if (nameDisplay) {
+        nameDisplay.textContent = savedName;
+    }
+
+    // 3. ЕСЛИ ВЫ ОТПРАВЛЯЕТЕ ФОРМУ:
+    // Ищем поле ввода имени в форме корзины (замените 'nameInput' на ваш ID)
+    const formInput = document.querySelector('input[name="username"]'); 
+    if (formInput) {
+        formInput.value = savedName;
+    }
+    
+    // Также можно добавить имя в данные заказа, которые вы формируете для отправки
+    console.log("Имя заказчика получено:", savedName);
+});
+</script>
 </body>
 </html>
