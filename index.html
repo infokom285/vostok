@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>infokom.vip</title>
+    
+    <title>Infokomvostok — Оптовый магазин электроники и аксессуаров</title>
+    <meta name="description" content="Широкий выбор товаров по оптовым ценам в магазине Infokom. Купите электронику, аксессуары и товары для дома с доставкой. Удобный заказ онлайн.">
+    <meta name="keywords" content="infokom, инфоком, опт, купить оптом, товары из китая, аксессуары оптом, электроника цены">
+    <meta name="robots" content="index, follow">
+
     <link rel="stylesheet" href="css/styles10.css">
     
     <style>
@@ -32,22 +37,35 @@
         #ad-modal-content p { font-size: 16px; color: #666; }
         #ad-modal-content .close-hint { font-size: 11px; color: #999; margin-top: 15px; }
 
-        /* Стили для корректного отображения инпута, не ломая шапку */
-		#nameInputInline {
+        /* Стили для корректного отображения инпута имени */
+        #nameInputInline {
             font-size: 18px;  
             font-weight: bold;
-            width: 130px; /* Ширина под 15 символов */
+            width: 130px; 
             border: 1px solid #007bff;
             border-radius: 4px;
             color: #333;
             outline: none;
             padding: 2px;
         }
-           
+
+        /* Скрытый заголовок для SEO */
+        .seo-h1 {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
     </style>
 </head>
 
 <body>
+<h1 class="seo-h1">Infokom.vip — Оптовая продажа аксессуаров и электроники</h1>
+
 <script src="js/main.js"></script>
 
 <div id="ad-modal-overlay" onclick="closeAdModal()">
@@ -125,7 +143,6 @@
         for (var i = 0; i < array.length; i++) { mainContainer.appendChild(createContainer(i)); }
     }
 
-    // Загрузка имени из памяти при старте
     document.addEventListener("DOMContentLoaded", function() {
         loadData();
         loadMenuTexts();
@@ -136,7 +153,6 @@
         }
     });
 
-    // Логика переключения текста на инпут
     function switchToInput() {
         const display = document.getElementById("usernameDisplay");
         const input = document.getElementById("nameInputInline");
@@ -148,24 +164,20 @@
         input.onblur = function() { saveNameFromInput(); };
     }
 
-function saveNameFromInput() {
-    const display = document.getElementById("usernameDisplay");
-    const input = document.getElementById("nameInputInline");
-    let newName = input.value.trim();
+    function saveNameFromInput() {
+        const display = document.getElementById("usernameDisplay");
+        const input = document.getElementById("nameInputInline");
+        let newName = input.value.trim();
 
-    // Если ввели пустое поле, оставляем старое или пишем "name"
-    if (newName === "") {
-        newName = currentUsername; 
+        if (newName === "") { newName = currentUsername; }
+
+        currentUsername = newName;
+        localStorage.setItem('username', currentUsername);
+
+        display.textContent = currentUsername;
+        display.style.display = "inline-block";
+        input.style.display = "none";
     }
-
-    currentUsername = newName;
-    // Ключевой момент: сохраняем в localStorage, чтобы корзина это видела
-    localStorage.setItem('username', currentUsername);
-
-    display.textContent = currentUsername;
-    display.style.display = "inline-block";
-    input.style.display = "none";
-}
 
     function openKorzina() { window.open('korzina.html', 'KorzinaWindow', 'width=600,height=500,left=200,top=100'); }
     function openCommentWindow() { window.open('comment.html', 'commentWindow', 'width=650,height=320,left=200,top=100'); }
@@ -183,7 +195,6 @@ function saveNameFromInput() {
 
 <header class="header">
 <style>
-    /* Ваши оригинальные стили без изменений */
     .number-row-wrapper { display: flex; justify-content: center; margin-top: 10px; }
     .number-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; }
     .number-row button { padding: 5px 10px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; background-color: #f8f9fa; transition: background-color 0.2s; }
@@ -214,9 +225,9 @@ function saveNameFromInput() {
     <div class="top-row">
         <button onclick="searchProduct()" class="search-button">&#128269;</button>
  
-		<div id="usernameContainer">
+        <div id="usernameContainer">
             <span id="usernameDisplay" onclick="switchToInput()">name</span>
-            <input type="text" id="nameInputInline" maxlength="15" style="display: none; width: 130px;">
+            <input type="text" id="nameInputInline" maxlength="15" style="display: none;">
         </div>
 
         <button onclick="openKorzina()" class="cart-button">
@@ -250,5 +261,13 @@ function saveNameFromInput() {
     </div>
 </div>
 </header>
+
+<footer style="margin-top: 50px; padding: 20px; border-top: 1px solid #ccc; text-align: center; background: #f9f9f9;">
+    <div style="max-width: 800px; margin: 0 auto; color: #666; font-size: 14px; line-height: 1.6;">
+        <p>#infokom #опт #электроника #аксессуары #купить_оптом #инфоком_вип #товары_по_низким_ценам</p>
+        <p>&copy; 2026 infokom.vip — Оптовый интернет-магазин.</p>
+    </div>
+</footer>
+
 </body>
 </html>
