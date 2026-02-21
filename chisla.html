@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши услуги — Инфокомвосток</title>
+    <style>
+        body {
+            margin: 0; padding: 15px;
+            display: flex; justify-content: center; align-items: flex-start;
+            min-height: 100vh;
+            background-color: #f4f7f9;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .service-card {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border: 3px solid #007bff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            text-align: center;
+        }
+        /* Кнопка-крестик */
+        .close-x {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            text-decoration: none;
+            color: #ccc;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .close-x:hover { color: #ff4d4d; }
+
+        h1 { color: #333; font-size: 24px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        
+        .services-list { text-align: left; margin-bottom: 25px; }
+        .service-item { 
+            background: #f8f9fa; 
+            margin: 8px 0; 
+            padding: 12px; 
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .back-link:hover { color: #007bff; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="service-card">
+    <a href="javascript:void(0)" onclick="window.close()" class="close-x">&times;</a>
+    
+    <h1>Наши услуги</h1>
+
+    <div class="services-list">
+        <div class="service-item">⚙️ <b>Ремонт принтеров и МФУ</b> (лазерные и струйные)</div>
+        <div class="service-item">🔋 <b>Заправка картриджей</b> с заменой чипов</div>
+        <div class="service-item">🛠️ <b>Восстановление фотобарабанов</b></div>
+        <div class="service-item">🧼 <b>Профилактика и чистка</b> оргтехники</div>
+        <div class="service-item">💻 <b>Настройка ПО</b> и подключение принтеров</div>
+    </div>
+
+    <p style="font-size: 13px; color: #666; font-style: italic;">
+        * Стоимость услуг зависит от модели устройства и сложности работ.
+    </p>
+
+    <a href="javascript:void(0)" onclick="window.close()" class="back-link">
+        &larr; Вернуться в магазин
+    </a>
+</div>
+
+</body>
+</html>

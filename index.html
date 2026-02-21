@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Infokomvostok — Оптовый магазин электроники и аксессуаров</title>
-    <meta name="description" content="Широкий выбор товаров по оптовым ценам в магазине Infokom. Купите электронику, аксессуары и товары для дома с доставкой. Удобный заказ онлайн.">
-    <meta name="keywords" content="infokom, инфоком, опт, купить оптом, товары из китая, аксессуары оптом, электроника цены">
+    <title>Инфокомвосток — Картриджи, чернила, принтеры в Донецке. Ремонт и обслуживание оргтехники</title>
+    <meta name="description" content="Интернет-магазин Инфокомвосток: продажа лазерных картриджей, чернил и принтеров Epson, Canon, HP в Донецке. Профессиональный ремонт и восстановление оргтехники.">
+    <meta name="keywords" content="Инфокомвосток, infokomvostok, купить картридж Донецк, лазерные картриджи, чернила для принтера, ремонт принтеров Донецк, восстановление заправка картриджей, принтеры Epson Canon HP">
     <meta name="robots" content="index, follow">
 
     <link rel="stylesheet" href="css/styles10.css">
@@ -37,7 +37,6 @@
         #ad-modal-content p { font-size: 16px; color: #666; }
         #ad-modal-content .close-hint { font-size: 11px; color: #999; margin-top: 15px; }
 
-        /* Стили для корректного отображения инпута имени */
         #nameInputInline {
             font-size: 18px;  
             font-weight: bold;
@@ -49,7 +48,6 @@
             padding: 2px;
         }
 
-        /* Скрытый заголовок для SEO */
         .seo-h1 {
             position: absolute;
             width: 1px;
@@ -64,7 +62,7 @@
 </head>
 
 <body>
-<h1 class="seo-h1">Infokom.vip — Оптовая продажа аксессуаров и электроники</h1>
+<h1 class="seo-h1">Инфокомвосток — Расходные материалы, принтеры и ремонт оргтехники в Донецке</h1>
 
 <script src="js/main.js"></script>
 
@@ -87,6 +85,15 @@
 <script>
     let array0 = []; let array = []; let array1 = []; let array2 = []; 
     let currentUsername = "name";
+
+    // Функция для открытия окон поверх страницы (как в Корзине)
+    function openModalWindow(url) {
+        const width = 650;
+        const height = 600;
+        const left = (window.screen.width / 2) - (width / 2);
+        const top = (window.screen.height / 2) - (height / 2);
+        window.open(url, 'ModalWindow', `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`);
+    }
 
     function loadData() {
         fetch('arr.json')
@@ -168,12 +175,9 @@
         const display = document.getElementById("usernameDisplay");
         const input = document.getElementById("nameInputInline");
         let newName = input.value.trim();
-
         if (newName === "") { newName = currentUsername; }
-
         currentUsername = newName;
         localStorage.setItem('username', currentUsername);
-
         display.textContent = currentUsername;
         display.style.display = "inline-block";
         input.style.display = "none";
@@ -182,15 +186,31 @@
     function openKorzina() { window.open('korzina.html', 'KorzinaWindow', 'width=600,height=500,left=200,top=100'); }
     function openCommentWindow() { window.open('comment.html', 'commentWindow', 'width=650,height=320,left=200,top=100'); }
 
-    function loadMenuTexts() {
-        fetch('menu.json')
-            .then(response => response.json())
-            .then(menuTexts => {
-                document.getElementById("menuRules").textContent = menuTexts.rules || "Правила";
-                document.getElementById("menuOpt").textContent = menuTexts.opt || "Опт";
-                document.getElementById("menuBlog").textContent = menuTexts.blog || "Блог";
-            }).catch(error => console.error("Ошибка загрузки меню:", error));
-    }
+
+function loadMenuTexts() {
+    fetch('menu.json')
+        .then(response => response.json())
+        .then(menuTexts => {
+            // Обновляем текст Контактов по новому ID
+            const contactElem = document.getElementById("menuContactsLink");
+            if (contactElem && menuTexts.contacts) {
+                contactElem.textContent = menuTexts.contacts;
+            }
+
+            // Обновляем текст Услуг
+            const servicesElem = document.getElementById("menuServices");
+            if (servicesElem && menuTexts.services) {
+                servicesElem.textContent = menuTexts.services;
+            }
+
+            // Обновляем текст Блога
+            const blogElem = document.getElementById("menuBlog");
+            if (blogElem && menuTexts.blog) {
+                blogElem.textContent = menuTexts.blog;
+            }
+        })
+        .catch(error => console.error("Ошибка загрузки меню:", error));
+}
 </script>
 
 <header class="header">
@@ -209,11 +229,8 @@
     #searchInput { width: 100%; height: 30px; padding-left: 10px; border: 1px solid #ccc; border-radius: 4px; }
     .header-row { display: flex; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 800px; margin-top: 1px; gap: 5px; min-height: 20px; padding: 2px 2px; height: 40px; }
     .header-part { margin: 2px; position: relative; }
-    .header-part a, .header-part button { font-size: 12px; padding: 3px 6px; border-radius: 4px; background: #ddd; border: none; cursor: pointer; white-space: nowrap; }
+    .header-part a, .header-part button { font-size: 12px; padding: 3px 6px; border-radius: 4px; background: #ddd; border: none; cursor: pointer; white-space: nowrap; text-decoration: none; color: black; display: inline-block; }
     .header-part.opt { background-color: #00FF00; }
-    .dropdown-content { display: none; position: absolute; background: white; border: 1px solid #ccc; z-index: 10; min-width: 120px; }
-    .header-part:hover .dropdown-content { display: block; }
-    .dropdown-content a { font-size: 12px; padding: 4px 8px; display: block; text-align: left; }
     #container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 150px 5px 5px 5px; }
     .box { width: calc(22% - 5px); max-width: 220px; background: #f8f9fa; border: 1px solid #ccc; border-radius: 4px; padding: 5px; text-align: center; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); margin: 2px; }
     .img-container { width: 100%; display: flex; justify-content: center; }
@@ -243,29 +260,38 @@
 
     <div id="numberRow"></div>
     <div id="dynamicContainer"></div>
-    
-    <div class="header-row">
+ <div class="header-row">
+    <div class="header-part">
+        <a href="#" id="menuContactsLink" onclick="openModalWindow('contact.html'); return false;">Контакты</a>
+    </div>
+    <div class="header-part opt">
+        <a href="#" id="menuServices" onclick="openModalWindow('chisla.html'); return false;">Услуги</a>
+    </div>
+    <div class="header-part opt">
+        <button id="menuBlog" onclick="openCommentWindow()">Блог</button>
+    </div>
+</div> 
+<!--    <div class="header-row">
         <div class="header-part">
-            <a href="#" id="menuRules">Правила</a>
-            <div class="dropdown-content" id="rulesDropdown">
-                <a href="chisla.html">Числа</a>
-                <a href="udarenie.html">Ударение</a>
-            </div>
+            <a href="javascript:void(0)" id="menuContacts" onclick="openModalWindow('contact.html')">Контакты</a>
         </div>
+    
         <div class="header-part opt">
-            <a href="chisla.html" id="menuOpt">Опт</a>
+            <a href="javascript:void(0)" id="menuServices" onclick="openModalWindow('chisla.html')">Услуги</a>
         </div>
+    
         <div class="header-part opt">
             <button id="menuBlog" onclick="openCommentWindow()">Блог</button>
         </div>
     </div>
-</div>
+</div> -->
 </header>
 
 <footer style="margin-top: 50px; padding: 20px; border-top: 1px solid #ccc; text-align: center; background: #f9f9f9;">
     <div style="max-width: 800px; margin: 0 auto; color: #666; font-size: 14px; line-height: 1.6;">
-        <p>#infokom #опт #электроника #аксессуары #купить_оптом #инфоком_вип #товары_по_низким_ценам</p>
-        <p>&copy; 2026 infokom.vip — Оптовый интернет-магазин.</p>
+        <p style="color: #666; font-size: 14px;">
+    Расходные материалы • Картриджи • Чернила • Ремонт принтеров • Обслуживание оргтехники в Донецке</p>
+        <p>&copy; 2026 Инфокомвосток — Сервисный центр и интернет-магазин расходных материалов.</p>
     </div>
 </footer>
 

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты — Инфокомвосток Донецк</title>
+    <style>
+        body {
+            margin: 0; padding: 20px;
+            display: flex; justify-content: center; align-items: flex-start;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .contact-card {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border: 3px solid blue;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; text-align: center; margin-bottom: 25px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        h2 { font-size: 18px; color: #007bff; margin-top: 20px; }
+        
+        .info-item { margin-bottom: 15px; line-height: 1.6; }
+        .label { font-weight: bold; color: #555; display: block; }
+        
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-tg { background-color: #0088cc; color: white; }
+        .btn-tel { background-color: #28a745; color: white; }
+        .btn-link:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .map-placeholder {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #495057;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contact-card">
+    <h1>Наши контакты</h1>
+
+    <div class="info-item">
+        <span class="label">📍 Точки выдачи (по согласованию):</span>
+        <div class="map-placeholder">
+            • ТК «Маяк» (г. Донецк)<br>
+            • Центр города
+        </div>
+    </div>
+
+    <div class="info-item">
+        <span class="label">⏰ График работы:</span>
+        Понедельник — Суббота: 9:00 – 17:00<br>
+        Воскресенье: Выходной
+    </div>
+
+    <h2>Быстрая связь:</h2>
+    
+    <a href="https://t.me/alex2858r" class="btn-link btn-tg" target="_blank">
+        ✈️ Написать в Telegram
+    </a>
+
+    <a href="tel:+79495405520" class="btn-link btn-tel">
+        📞 Позвонить: +7 (949) 540-55-20
+    </a>
+
+    <div class="info-item" style="margin-top: 20px; font-size: 13px; color: #777; text-align: center;">
+        * Прием техники на ремонт и выдача заказов осуществляются по предварительному звонку.
+    </div>
+<!--    <a href="javascript:void(0)" onclick="window.close()" style="text-decoration: none; color: #888; font-size: 14px;">
+        &larr; Вернуться в магазин
+    </a>  -->
+	<a href="javascript:void(0)" onclick="window.close()" class="back-link">
+        &larr; Вернуться в магазин
+    </a>
+</div>
+
+</body>
+</html>
