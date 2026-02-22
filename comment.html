@@ -91,6 +91,15 @@
 
         .btn-tg { background-color: #0088cc; color: white; border: none; }
         .btn-tg:hover { background-color: #0077b5; }
+		.btn-jitsi {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+}
+.btn-jitsi:hover {
+    background-color: #004494;
+    transform: translateY(-2px);
+}
         .btn-video { 
             background-color: #6c5ce7; /* Красивый фиолетовый цвет */
             color: white; 
@@ -135,7 +144,19 @@
             </select>
             
             <textarea name="message" id="commentText" placeholder="Введите ваше сообщение..." required></textarea>
-            <div class="buttons-row">
+<div class="buttons-row">
+    <a href="https://meet.jit.si/InfokomVostok_Support" target="_blank" class="btn btn-jitsi">
+        🌐 Онлайн-приемная
+    </a>
+
+    <a href="https://t.me/alex2858r" target="_blank" class="btn btn-video">📹 Видеосвязь</a>
+    <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">WhatsApp</a>
+    <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
+    
+    <button type="submit" id="submitBtn" class="btn btn-submit">Отправить Email</button>
+</div>
+ 
+<!-- <div class="buttons-row">
     <a href="https://t.me/alex2858r" target="_blank" class="btn btn-video">
         📹 Видеосвязь
     </a>
@@ -144,7 +165,7 @@
     <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
     
     <button type="submit" id="submitBtn" class="btn btn-submit">Отправить Email</button>
-</div>
+</div>  -->
 <!--            <div class="buttons-row">
                 <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">WhatsApp</a>
                 <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
