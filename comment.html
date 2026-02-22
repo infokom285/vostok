@@ -3,76 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Написать нам</title>
+    <title>Написать нам — Инфокомвосток</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            margin: 0; padding: 15px;
+            display: flex; justify-content: center; align-items: flex-start;
             min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
+            background-color: #f4f7f9;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         .container {
             width: 100%;
-            max-width: 800px; /* Увеличено для размещения кнопок в ряд */
+            max-width: 550px;
+            background: white;
+            border: 3px solid #007bff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
             text-align: center;
         }
 
-        h2 { font-size: 22px; font-weight: bold; margin-bottom: 20px; }
+        /* Кнопка-крестик */
+        .close-x {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 28px;
+            text-decoration: none;
+            color: #ccc;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .close-x:hover { color: #ff4d4d; }
+
+        h2 { color: #333; font-size: 22px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 
         /* Стили полей ввода */
         input[type="text"], select, textarea {
             width: 100%;
             padding: 12px;
             margin-bottom: 12px;
-            border: 1px solid #000;
-            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
             box-sizing: border-box;
             outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: #007bff;
         }
 
         textarea { height: 100px; resize: none; }
 
-        /* Контейнер для кнопок в одну строку */
+        /* Контейнер для кнопок */
         .buttons-row {
             display: flex;
             justify-content: center;
-            align-items: center;
+            flex-wrap: wrap;
             gap: 10px;
             margin-top: 10px;
         }
 
         /* Общие стили кнопок */
         .btn {
-            padding: 10px 15px;
+            padding: 10px 18px;
             font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            border-radius: 4px;
-            border: 1px solid #767676;
+            border-radius: 6px;
+            border: 1px solid #ccc;
             text-decoration: none;
-            color: black;
-            background-color: #f0f0f0;
+            color: #333;
+            background-color: #f8f9fa;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            white-space: nowrap;
+            transition: all 0.2s;
         }
 
+        .btn:hover { background-color: #e2e6ea; }
+
         .btn-wa { background-color: #25D366; color: white; border: none; }
+        .btn-wa:hover { background-color: #21b858; }
+
         .btn-tg { background-color: #0088cc; color: white; border: none; }
+        .btn-tg:hover { background-color: #0077b5; }
+
+        .btn-submit { background-color: #007bff; color: white; border: none; }
+        .btn-submit:hover { background-color: #0069d9; }
         
         button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .back-link:hover { color: #007bff; text-decoration: underline; }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <a href="javascript:void(0)" onclick="window.close()" class="close-x">&times;</a>
+
         <h2>Написать нам</h2>
 
         <form id="commentForm">
@@ -92,17 +132,22 @@
                 <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">WhatsApp</a>
                 <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
                 
-                <button type="submit" id="submitBtn" class="btn">Email</button>
-                <button type="button" onclick="window.close()" class="btn">Выход</button>
+                <button type="submit" id="submitBtn" class="btn btn-submit">Отправить Email</button>
             </div>
         </form>
+
+        <a href="javascript:void(0)" onclick="window.close()" class="back-link">
+            &larr; Вернуться в магазин
+        </a>
     </div>
 
     <script>
         // Автозаполнение имени из localStorage
         document.addEventListener("DOMContentLoaded", () => {
             const savedName = localStorage.getItem('username');
-            if (savedName) document.getElementById('userName').value = savedName;
+            if (savedName && savedName !== "name") {
+                document.getElementById('userName').value = savedName;
+            }
         });
 
         const form = document.getElementById('commentForm');
@@ -126,13 +171,14 @@
                     alert("Сообщение отправлено!");
                     window.close();
                 } else {
-                    alert("Ошибка отправки.");
+                    alert("Ошибка отправки. Попробуйте еще раз.");
                     submitBtn.disabled = false;
-                    submitBtn.innerText = "Email";
+                    submitBtn.innerText = "Отправить Email";
                 }
             } catch (error) {
-                alert("Ошибка сети.");
+                alert("Ошибка сети. Проверьте интернет-соединение.");
                 submitBtn.disabled = false;
+                submitBtn.innerText = "Отправить Email";
             }
         };
     </script>
