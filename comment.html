@@ -91,7 +91,15 @@
 
         .btn-tg { background-color: #0088cc; color: white; border: none; }
         .btn-tg:hover { background-color: #0077b5; }
-
+        .btn-video { 
+            background-color: #6c5ce7; /* Красивый фиолетовый цвет */
+            color: white; 
+            border: none; 
+        }
+        .btn-video:hover { 
+            background-color: #5849c4; 
+            transform: translateY(-2px); /* Легкий эффект приподнимания */
+        }
         .btn-submit { background-color: #007bff; color: white; border: none; }
         .btn-submit:hover { background-color: #0069d9; }
         
@@ -127,13 +135,22 @@
             </select>
             
             <textarea name="message" id="commentText" placeholder="Введите ваше сообщение..." required></textarea>
-
             <div class="buttons-row">
+    <a href="https://t.me/alex2858r" target="_blank" class="btn btn-video">
+        📹 Видеосвязь
+    </a>
+    
+    <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">WhatsApp</a>
+    <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
+    
+    <button type="submit" id="submitBtn" class="btn btn-submit">Отправить Email</button>
+</div>
+<!--            <div class="buttons-row">
                 <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">WhatsApp</a>
                 <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
                 
                 <button type="submit" id="submitBtn" class="btn btn-submit">Отправить Email</button>
-            </div>
+            </div> -->
         </form>
 
         <a href="javascript:void(0)" onclick="window.close()" class="back-link">
