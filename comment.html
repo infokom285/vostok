@@ -12,213 +12,130 @@
             background-color: #f4f7f9;
             font-family: 'Segoe UI', Arial, sans-serif;
         }
-
         .container {
-            width: 100%;
-            max-width: 550px;
-            background: white;
-            border: 3px solid #007bff;
-            border-radius: 12px;
-            padding: 25px;
+            width: 100%; max-width: 550px;
+            background: white; border: 3px solid #007bff;
+            border-radius: 12px; padding: 25px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            position: relative;
-            text-align: center;
+            position: relative; text-align: center;
         }
-
-        /* Кнопка-крестик */
         .close-x {
-            position: absolute;
-            top: 10px; right: 15px;
-            font-size: 28px;
-            text-decoration: none;
-            color: #ccc;
-            cursor: pointer;
-            line-height: 1;
+            position: absolute; top: 10px; right: 15px;
+            font-size: 28px; text-decoration: none; color: #ccc; cursor: pointer;
         }
         .close-x:hover { color: #ff4d4d; }
-
+        
         h2 { color: #333; font-size: 22px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 
-        /* Стили полей ввода */
         input[type="text"], select, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 15px;
-            box-sizing: border-box;
-            outline: none;
-            transition: border-color 0.2s;
+            width: 100%; padding: 12px; margin-bottom: 12px;
+            border: 1px solid #ccc; border-radius: 6px; font-size: 15px;
+            box-sizing: border-box; outline: none;
         }
-
-        input[type="text"]:focus, select:focus, textarea:focus {
-            border-color: #007bff;
-        }
-
         textarea { height: 100px; resize: none; }
 
-        /* Контейнер для кнопок */
-        .buttons-row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        /* Общие стили кнопок */
+        .buttons-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        
         .btn {
-            padding: 10px 18px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            text-decoration: none;
-            color: #333;
-            background-color: #f8f9fa;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
+            padding: 10px 18px; font-size: 14px; font-weight: 500;
+            cursor: pointer; border-radius: 6px; border: none;
+            text-decoration: none; display: inline-flex; align-items: center; transition: all 0.2s;
+            color: white;
         }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
 
-        .btn:hover { background-color: #e2e6ea; }
+        .btn-jitsi { background-color: #0056b3; } /* Синий */
+        .btn-wa { background-color: #25D366; }    /* Зеленый */
+        .btn-tg { background-color: #0088cc; }    /* Голубой */
+        .btn-submit { background-color: #333; }   /* Черный */
 
-        .btn-wa { background-color: #25D366; color: white; border: none; }
-        .btn-wa:hover { background-color: #21b858; }
-
-        .btn-tg { background-color: #0088cc; color: white; border: none; }
-        .btn-tg:hover { background-color: #0077b5; }
-		.btn-jitsi {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-}
-.btn-jitsi:hover {
-    background-color: #004494;
-    transform: translateY(-2px);
-}
-        .btn-video { 
-            background-color: #6c5ce7; /* Красивый фиолетовый цвет */
-            color: white; 
-            border: none; 
-        }
-        .btn-video:hover { 
-            background-color: #5849c4; 
-            transform: translateY(-2px); /* Легкий эффект приподнимания */
-        }
-        .btn-submit { background-color: #007bff; color: white; border: none; }
-        .btn-submit:hover { background-color: #0069d9; }
+        .back-link { display: block; margin-top: 20px; color: #888; text-decoration: none; font-size: 14px; }
+        .back-link:hover { color: #007bff; text-decoration: underline; }
         
         button:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        .back-link {
-            display: block;
-            margin-top: 20px;
-            color: #888;
-            text-decoration: none;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .back-link:hover { color: #007bff; text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <a href="javascript:void(0)" onclick="window.close()" class="close-x">&times;</a>
+<div class="container">
+    <a href="javascript:void(0)" onclick="window.close()" class="close-x">&times;</a>
+    <h2>Написать нам</h2>
 
-        <h2>Написать нам</h2>
+    <form id="commentForm">
+        <input type="text" name="name" id="userName" placeholder="Ваше имя" required>
+        <input type="text" name="contact" placeholder="Ваш телефон или мессенджер" required>
+        
+        <select name="subject" required>
+            <option value="" disabled selected>Выберите тему обращения</option>
+            <option value="Заказ">📦 Сделать заказ</option>
+            <option value="Вопрос">❓ Вопрос</option>
+            <option value="Ошибка">⚠️ Ошибка</option>
+        </select>
+        
+        <textarea name="message" id="commentText" placeholder="Введите ваше сообщение..." required></textarea>
 
-        <form id="commentForm">
-            <input type="text" name="name" id="userName" placeholder="Ваше имя" required>
-            <input type="text" name="contact" placeholder="Ваш телефон, WhatsApp или Telegram" required>
-            
-            <select name="subject" required>
-                <option value="" disabled selected>Выберите тему обращения</option>
-                <option value="Заказ">📦 Сделать заказ</option>
-                <option value="Вопрос">❓ Вопрос</option>
-                <option value="Ошибка">⚠️ Ошибка</option>
-            </select>
-            
-            <textarea name="message" id="commentText" placeholder="Введите ваше сообщение..." required></textarea>
-<div class="buttons-row">
-    <a href="https://meet.jit.si/InfokomVostok_Support" target="_blank" class="btn btn-jitsi">
-        🌐 Онлайн-приемная
-    </a>
+        <div class="buttons-row">
+            <a href="https://meet.jit.si/InfokomVostok_Support" target="_blank" class="btn btn-jitsi" onclick="notifyMaster()">🌐 Онлайн-приемная</a>
+            <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">✈️ Telegram (Чат/Видео)</a>
+            <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">🟢 WhatsApp</a>
+            <button type="submit" id="submitBtn" class="btn btn-submit">📧 Отправить Email</button>
+        </div>
+    </form>
 
-    <a href="https://t.me/alex2858r" target="_blank" class="btn btn-video">📹 Видеосвязь</a>
-    <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">WhatsApp</a>
-    <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
-    
-    <button type="submit" id="submitBtn" class="btn btn-submit">Отправить Email</button>
+    <a href="javascript:void(0)" onclick="window.close()" class="back-link">&larr; Вернуться в магазин</a>
 </div>
- 
-<!-- <div class="buttons-row">
-    <a href="https://t.me/alex2858r" target="_blank" class="btn btn-video">
-        📹 Видеосвязь
-    </a>
-    
-    <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">WhatsApp</a>
-    <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
-    
-    <button type="submit" id="submitBtn" class="btn btn-submit">Отправить Email</button>
-</div>  -->
-<!--            <div class="buttons-row">
-                <a href="https://wa.me/79495405520" target="_blank" class="btn btn-wa">WhatsApp</a>
-                <a href="https://t.me/alex2858r" target="_blank" class="btn btn-tg">Telegram</a>
-                
-                <button type="submit" id="submitBtn" class="btn btn-submit">Отправить Email</button>
-            </div> -->
-        </form>
 
-        <a href="javascript:void(0)" onclick="window.close()" class="back-link">
-            &larr; Вернуться в магазин
-        </a>
-    </div>
+<script>
+    // 1. Автозаполнение имени из главной страницы
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedName = localStorage.getItem('username');
+        if (savedName && savedName !== "name") {
+            document.getElementById('userName').value = savedName;
+        }
+    });
 
-    <script>
-        // Автозаполнение имени из localStorage
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedName = localStorage.getItem('username');
-            if (savedName && savedName !== "name") {
-                document.getElementById('userName').value = savedName;
-            }
+    // 2. Скрытое уведомление на почту при входе клиента в Jitsi
+    function notifyMaster() {
+        const clientName = document.getElementById('userName').value || "Клиент";
+        fetch("https://formspree.io/f/xnjzerwn", {
+            method: "POST",
+            body: JSON.stringify({ 
+                Уведомление: `Пользователь ${clientName} зашел в Jitsi Meet и ждет связи.`,
+                _subject: "ВЫЗОВ В ОНЛАЙН-ПРИЕМНУЮ" 
+            }),
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
         });
+    }
 
-        const form = document.getElementById('commentForm');
-        const submitBtn = document.getElementById('submitBtn');
-
-        form.onsubmit = async function(e) {
-            e.preventDefault();
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Отправка...";
-
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch("https://formspree.io/f/xnjzerwn", {
-                    method: "POST",
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    alert("Сообщение отправлено!");
-                    window.close();
-                } else {
-                    alert("Ошибка отправки. Попробуйте еще раз.");
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "Отправить Email";
-                }
-            } catch (error) {
-                alert("Ошибка сети. Проверьте интернет-соединение.");
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Отправить Email";
+    // 3. Отправка основной формы через Formspree
+    const form = document.getElementById('commentForm');
+    form.onsubmit = async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerText = "Отправка...";
+        
+        try {
+            const response = await fetch("https://formspree.io/f/xnjzerwn", {
+                method: "POST",
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+                alert("Сообщение успешно отправлено!");
+                window.close();
+            } else {
+                alert("Произошла ошибка. Попробуйте еще раз.");
+                btn.disabled = false;
+                btn.innerText = "📧 Отправить Email";
             }
-        };
-    </script>
+        } catch (error) {
+            alert("Ошибка сети. Проверьте интернет.");
+            btn.disabled = false;
+            btn.innerText = "📧 Отправить Email";
+        }
+    };
+</script>
+
 </body>
 </html>
