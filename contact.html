@@ -22,7 +22,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         h1 { color: #333; text-align: center; margin-bottom: 25px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
-        h2 { font-size: 18px; color: #007bff; margin-top: 20px; }
+        h2 { font-size: 18px; color: #007bff; margin-top: 20px; margin-bottom: 15px; }
         
         .info-item { margin-bottom: 15px; line-height: 1.6; }
         .label { font-weight: bold; color: #555; display: block; }
@@ -37,10 +37,37 @@
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
         }
         .btn-tg { background-color: #0088cc; color: white; }
         .btn-tel { background-color: #28a745; color: white; }
+        .btn-mail { background-color: #d93025; color: white; } 
         .btn-link:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* Стили для формы почты */
+        .mail-form-container {
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ffcccc;
+            margin-top: 10px;
+        }
+        .mail-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        .mail-textarea {
+            height: 70px;
+            resize: none;
+        }
 
         .back-link {
             display: block;
@@ -76,30 +103,82 @@
 
     <div class="info-item">
         <span class="label">⏰ График работы:</span>
-        Понедельник — Суббота: 9:00 – 17:00<br>
-        Воскресенье: Выходной
+        Вторник — Воскресенье: 9:00 – 17:00<br>
+        Понедельник: Выходной
     </div>
 
-    <h2>Быстрая связь:</h2>
+    <h2>Связаться с мастером:</h2>
     
     <a href="https://t.me/alex2858r" class="btn-link btn-tg" target="_blank">
         ✈️ Написать в Telegram
     </a>
+    <div class="mail-form-container">
+        <span class="label" style="margin-bottom: 5px; color: #d93025;">📧 Написать на Email:</span>
+        <form id="contactMailForm">
+            <input type="text" name="name" id="userFormName" placeholder="Ваше имя" required class="mail-input">
+            
+            <input type="text" name="phone" placeholder="Ваш телефон (необязательно)" class="mail-input">
+            
+            <textarea name="message" placeholder="Ваше сообщение или вопрос..." required class="mail-input mail-textarea"></textarea>
+            
+            <button type="submit" id="mailSubmitBtn" class="btn-link btn-mail">
+                Отправить письмо
+            </button>
+        </form>
+    </div>
 
-    <a href="tel:+79495405520" class="btn-link btn-tel">
+    <a href="tel:+79495405520" class="btn-link btn-tel" style="margin-top: 15px;">
         📞 Позвонить: +7 (949) 540-55-20
     </a>
 
     <div class="info-item" style="margin-top: 20px; font-size: 13px; color: #777; text-align: center;">
         * Прием техники на ремонт и выдача заказов осуществляются по предварительному звонку.
     </div>
-<!--    <a href="javascript:void(0)" onclick="window.close()" style="text-decoration: none; color: #888; font-size: 14px;">
-        &larr; Вернуться в магазин
-    </a>  -->
-	<a href="javascript:void(0)" onclick="window.close()" class="back-link">
+
+    <a href="javascript:void(0)" onclick="window.close()" class="back-link">
         &larr; Вернуться в магазин
     </a>
 </div>
+
+<script>
+    // Автозаполнение имени
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedName = localStorage.getItem('username');
+        if (savedName && savedName !== "name") {
+            document.getElementById('userFormName').value = savedName;
+        }
+    });
+
+    // Обработка отправки формы
+    const mailForm = document.getElementById('contactMailForm');
+    const mailBtn = document.getElementById('mailSubmitBtn');
+
+    mailForm.onsubmit = async function(e) {
+        e.preventDefault();
+        mailBtn.disabled = true;
+        mailBtn.innerText = "Отправка...";
+
+        try {
+            const response = await fetch("https://formspree.io/f/xnjzerwn", {
+                method: "POST",
+                body: new FormData(mailForm),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                alert("Сообщение успешно отправлено мастеру!");
+                mailForm.reset();
+            } else {
+                alert("Ошибка при отправке. Попробуйте мессенджеры.");
+            }
+        } catch (error) {
+            alert("Ошибка сети.");
+        } finally {
+            mailBtn.disabled = false;
+            mailBtn.innerText = "Отправить письмо";
+        }
+    };
+</script>
 
 </body>
 </html>
