@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Корзина — Инфокомвосток Infokomvostok</title>
+    <title>Корзина — Infokomvostok</title>
     <style>
         body {
             margin: 0; padding: 0;
@@ -23,107 +23,45 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
         }
         h1 { text-align: center; margin-top: 0; margin-bottom: 5px; }
-        #userWelcome { 
-            text-align: center; 
-            color: #007bff; 
-            margin-bottom: 15px; 
-            font-size: 16px;
-            padding: 5px;
-            background: #f0f7ff;
-            border-radius: 4px;
-        }
+        #userWelcome { text-align: center; color: #007bff; margin-bottom: 15px; font-size: 16px; padding: 5px; background: #f0f7ff; border-radius: 4px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
         th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
         th { background: #f0f0f0; }
         .total { font-weight: bold; text-align: right; }
         
-        /* Стили для кнопок изменения количества */
-        .qty-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            white-space: nowrap;
-        }
-        .qty-btn {
-            width: 32px;
-            height: 32px;
-            background-color: #f8f9fa;
-            border: 1px solid #ccc;
-            color: #333;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            line-height: 1;
-        }
-        .qty-btn:active { background-color: #e2e6ea; }
-        
-        .qty-input {
-            width: 45px;
-            height: 30px;
-            text-align: center;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            -moz-appearance: textfield;
-        }
-        .qty-input::-webkit-outer-spin-button,
-        .qty-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+        .price-cell { 
+            white-space: nowrap; 
+            text-align: right; 
+            min-width: 100px; 
+            font-family: 'Courier New', monospace;
         }
 
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 5px;
+        /* Контейнер для кнопок управления количеством */
+        .qty-container { display: flex; align-items: center; justify-content: center; gap: 2px; }
+        .qty-btn { width: 28px; height: 30px; cursor: pointer; font-weight: bold; border: 1px solid #ccc; background: #eee; border-radius: 4px; }
+        .qty-btn:hover { background: #ddd; }
+        
+        /* Поле ввода: тип text убирает лишние стрелки браузера */
+        .qty-input { 
+            width: 30px; /* Сделано под 2 цифры */
+            height: 28px; 
+            text-align: center; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            font-size: 14px;
         }
+
+        .buttons-container { display: flex; flex-direction: column; gap: 10px; background: #f9f9f9; padding: 15px; border-radius: 5px; }
         .main-row { display: flex; justify-content: space-between; gap: 10px; }
         
-        button.action-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            color: white;
-        }
+        button.action-btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; color: white; }
         .btn-pay { background-color: #28a745; }
         .btn-clear { background-color: #6c757d; }
         .btn-close { background-color: #dc3545; }
-        .btn-confirm { background-color: #007bff; width: 100%; margin-top: 10px; color: white; padding: 12px; }
+        .btn-confirm { background-color: #007bff; width: 100%; margin-top: 10px; }
 
-        #commentSection {
-            border: 1px solid #007bff;
-            padding: 15px;
-            margin-top: 10px;
-            display: none;
-        }
-        .contact-info {
-            background: #e9ecef;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        textarea, select { width: 100%; border: 1px solid #ccc; padding: 8px; border-radius: 5px; box-sizing: border-box; margin-top: 5px; margin-bottom: 10px; }
-
-        .error-field { border: 2px solid red !important; background-color: #fff0f0; }
-
-        @media (max-width: 600px) {
-            .window { width: 95%; padding: 10px; }
-            th, td { padding: 5px; font-size: 13px; }
-            .qty-btn { width: 35px; height: 35px; } /* Крупнее для пальцев */
-        }
+        #commentSection { border: 1px solid #007bff; padding: 15px; margin-top: 10px; display: none; }
+        textarea, select { width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -136,7 +74,7 @@
         <thead>
             <tr>
                 <th>Наименование</th>
-                <th>Кол-во</th>
+                <th style="text-align: center; width: 100px;">Кол-во</th>
                 <th>Цена</th>
                 <th>Сумма</th>
             </tr>
@@ -145,7 +83,7 @@
         <tfoot>
             <tr>
                 <td colspan="3" class="total">ИТОГО:</td>
-                <td id="totalSum" style="font-weight: bold;">0</td>
+                <td id="totalSum" class="price-cell" style="font-weight: bold; font-size: 1.1em;">0</td>
             </tr>
         </tfoot>
     </table>
@@ -158,37 +96,25 @@
         </div>
 
         <div id="commentSection">
-            <div class="contact-info">
-                <strong>Наши контакты:</strong><br>
-                📞 Телефон: <a href="tel:+79495405520" style="color: #007bff; text-decoration: none;">+7 (949) 540-55-20</a><br>
-                ✈️ Telegram: <a href="https://t.me/alex2858r" target="_blank" style="color: #007bff; text-decoration: none;">@alex2858r</a><br>
-                💰 <strong>Оплата при получении</strong>
-            </div>
-
-            <label><b>Где удобно получить заказ?</b></label>
+            <label><b>Куда доставить или где забрать?</b></label>
             <select id="deliveryPoint">
                 <option value="ТК Маяк">ТК "Маяк"</option>
                 <option value="В центре г.Донецка">В центре г.Донецка</option>
-                <option value="Другое">Другое (укажу в комментарии)</option>
+                <option value="Другое">Другое (укажу ниже)</option>
             </select>
-
-            <label><b>Ваши контакты и комментарий:</b></label>
-            <textarea id="clientComment" rows="3" placeholder="Ваш телефон или ник в Telegram..."></textarea>
-            
+            <label><b>Контакты (Телефон/Telegram):</b></label>
+            <textarea id="clientComment" rows="3" placeholder="Укажите как с вами связаться..."></textarea>
             <button id="confirmPaymentButton" class="action-btn btn-confirm" onclick="proceedToPayment()">ОТПРАВИТЬ ЗАКАЗ</button>
-            <button type="button" onclick="cancelPayment()" style="background:none; color: gray; width:100%; margin-top:5px; font-size:12px; border:none; cursor:pointer;">Отмена</button>
         </div>
     </div>
 </div>
 
 <script>
     let array4 = [];
-    const MY_PHONE = "+7 (949) 540-55-20";
-    const MY_TELEGRAM = "@alex2858r";
 
     function loadCart() {
         const savedName = localStorage.getItem('username');
-        document.getElementById("clientName").textContent = (savedName && savedName !== "name") ? savedName : "Гость";
+        document.getElementById("clientName").textContent = savedName || "Гость";
 
         const stored = localStorage.getItem('array4');
         array4 = stored ? JSON.parse(stored) : [];
@@ -199,16 +125,15 @@
             for (let i = 0; i < parts.length; i += 2) {
                 if (parts[i] && parts[i+1]) {
                     let newName = parts[i].trim();
-                    let newPrice = parts[i+1].trim();
+                    let newPriceStr = parts[i+1].trim();
                     let found = false;
                     for (let j = 0; j < array4.length; j += 3) {
                         if (array4[j] === newName) {
                             array4[j+1] = String(parseInt(array4[j+1]) + 1);
-                            found = true;
-                            break;
+                            found = true; break;
                         }
                     }
-                    if (!found) { array4.push(newName, "1", newPrice); }
+                    if (!found) { array4.push(newName, "1", newPriceStr); }
                 }
             }
             localStorage.removeItem('n2n');
@@ -217,133 +142,110 @@
         renderCart();
     }
 
-    function saveCart() {
-        localStorage.setItem('array4', JSON.stringify(array4));
-    }
+    function saveCart() { localStorage.setItem('array4', JSON.stringify(array4)); }
 
     function renderCart() {
         const tbody = document.querySelector("#cartTable tbody");
         const totalElem = document.getElementById("totalSum");
         tbody.innerHTML = '';
         let total = 0;
+        let detectedCurrency = "";
 
         for (let i = 0; i < array4.length; i += 3) {
-            const name = array4[i], qty = Number(array4[i+1]), price = Number(array4[i+2]);
-            const sum = qty * price;
+            const name = array4[i];
+            const qty = Number(array4[i+1]);
+            const priceStr = array4[i+2];
+            
+            const cleanPrice = parseFloat(priceStr.replace(/[^0-9.,]/g, "").replace(',', '.')) || 0;
+            
+            if (!detectedCurrency) {
+                detectedCurrency = priceStr.replace(/[0-9., ]/g, "");
+            }
+
+            const sum = qty * cleanPrice;
             total += sum;
 
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${name}</td>
-                <td>
+                <td style="text-align: center;">
                     <div class="qty-container">
                         <button class="qty-btn" onclick="changeQty(${i}, -1)">-</button>
-                        <input type="number" class="qty-input" value="${qty}" onchange="manualUpdateQty(${i}, this.value)">
+                        <input type="text" class="qty-input" value="${qty}" onchange="manualUpdateQty(${i}, this.value)">
                         <button class="qty-btn" onclick="changeQty(${i}, 1)">+</button>
                     </div>
                 </td>
-                <td>${price}</td>
-                <td>${sum}</td>
+                <td class="price-cell">${cleanPrice.toFixed(2)}&nbsp;${detectedCurrency}</td>
+                <td class="price-cell">${sum.toFixed(2)}&nbsp;${detectedCurrency}</td>
             `;
             tbody.appendChild(row);
         }
-        totalElem.textContent = total;
+        totalElem.innerHTML = total.toFixed(2) + "&nbsp;" + (detectedCurrency || "");
     }
 
     function changeQty(index, delta) {
         let currentQty = parseInt(array4[index + 1]);
         let newQty = currentQty + delta;
-        if (newQty <= 0) {
-            if(confirm("Удалить этот товар?")) { array4.splice(index, 3); }
-        } else {
-            array4[index + 1] = String(newQty);
+        if (newQty <= 0) { 
+            if(confirm("Удалить этот товар из списка?")) {
+                array4.splice(index, 3); 
+            }
+        } else { 
+            array4[index + 1] = String(newQty); 
         }
-        saveCart();
-        renderCart();
+        saveCart(); renderCart();
     }
 
     function manualUpdateQty(index, val) {
         let newQty = parseInt(val);
-        if (isNaN(newQty) || newQty <= 0) { array4.splice(index, 3); } 
-        else { array4[index + 1] = String(newQty); }
-        saveCart();
-        renderCart();
-    }
-
-    function clearCart() {
-        if(confirm("Очистить корзину?")) {
-            array4 = [];
-            saveCart();
-            renderCart();
+        // Проверка: если ввели не число или 0
+        if (isNaN(newQty) || newQty <= 0) {
+            if(confirm("Удалить этот товар из списка?")) {
+                array4.splice(index, 3);
+            } else {
+                renderCart(); // Отмена удаления, перерисовка старого значения
+            }
+        } else {
+            array4[index + 1] = String(newQty);
         }
+        saveCart(); renderCart();
     }
 
-    function showCommentField() {
-        if (array4.length === 0) return alert("Корзина пуста!");
-        document.getElementById("commentSection").style.display = "block";
-        document.getElementById("commentSection").scrollIntoView({ behavior: 'smooth' });
-    }
+    function clearCart() { if(confirm("Полностью очистить корзину?")) { array4 = []; saveCart(); renderCart(); } }
 
-    function cancelPayment() { document.getElementById("commentSection").style.display = "none"; }
+    function showCommentField() { if (array4.length > 0) document.getElementById("commentSection").style.display = "block"; }
 
     async function proceedToPayment() {
         const btn = document.getElementById('confirmPaymentButton');
-        const commentField = document.getElementById('clientComment');
-        const deliveryField = document.getElementById('deliveryPoint');
-        const user = localStorage.getItem('username') || "Не указано";
-        const total = document.getElementById('totalSum').textContent;
+        const comment = document.getElementById('clientComment').value;
+        if (comment.length < 5) return alert("Пожалуйста, укажите контакты для связи.");
 
-        if (commentField.value.trim().length < 5) {
-            alert("Укажите контакты для связи.");
-            commentField.classList.add('error-field');
-            return;
-        }
-
-        btn.disabled = true;
-        btn.innerText = "Отправка...";
-
-        let orderList = "";
+        btn.disabled = true; btn.innerText = "Отправка заказа...";
+        let orderDetails = "";
         for (let i = 0; i < array4.length; i += 3) {
-            orderList += `${array4[i]} x ${array4[i+1]} шт. (${array4[i+2]} руб.)\n`;
+            let cleanName = array4[i].replace(/<[^>]*>?/gm, '');
+            orderDetails += `${cleanName} x ${array4[i+1]} (${array4[i+2]})\n`;
         }
 
         try {
-            const response = await fetch("https://formspree.io/f/xnjzerwn", {
+            const res = await fetch("https://formspree.io/f/xnjzerwn", {
                 method: "POST",
-                body: JSON.stringify({
-                    Заказчик: user,
-                    Место: deliveryField.value,
-                    Контакты: commentField.value,
-                    ЗАКАЗ: orderList,
-                    ИТОГО: total + " руб."
+                body: JSON.stringify({ 
+                    Заказчик: document.getElementById("clientName").textContent,
+                    Заказ: orderDetails, 
+                    Контакты: comment, 
+                    Место: document.getElementById("deliveryPoint").value,
+                    Итого: document.getElementById('totalSum').innerText 
                 }),
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
             });
-
-            if (response.ok) {
-                const receiptText = `ЗАКАЗ в Infokomvostok\n` +
-                    `==========================\n` +
-                    `Заказчик: ${user}\n` +
-                    `Товары:\n${orderList}` +
-                    `==========================\n` +
-                    `ИТОГО: ${total} руб.\n` +
-                    `Место выдачи: ${deliveryField.value}\n` +
-                    `Связь: ${MY_PHONE} / ${MY_TELEGRAM}\n` +
-                    `Спасибо!`;
-
-                const blob = new Blob([receiptText], { type: "text/plain" });
-                const link = document.createElement("a");
-                link.href = URL.createObjectURL(blob);
-                link.download = `Zakaz_Infokom.txt`;
-                link.click();
-
-                alert("Заказ отправлен!");
-                array4 = []; saveCart(); window.close();
-            } else { throw new Error(); }
-        } catch (error) {
-            alert("Ошибка отправки.");
-            btn.disabled = false;
-            btn.innerText = "ОТПРАВИТЬ ЗАКАЗ";
+            if (res.ok) { 
+                alert("Заказ успешно отправлен! Мы свяжемся с вами."); 
+                array4 = []; saveCart(); window.close(); 
+            }
+        } catch (e) { 
+            alert("Произошла ошибка при отправке."); 
+            btn.disabled = false; btn.innerText = "ОТПРАВИТЬ ЗАКАЗ";
         }
     }
 
