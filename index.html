@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!--    <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
     <link rel="icon" href="favicon_ivm.ico?v=2" type="image/x-icon">
     <title>Инфокомвосток — Картриджи, чернила, принтеры в Донецке. Ремонт и обслуживание оргтехники</title>
+    
+    <link rel="canonical" href="https://infokom285.github.io/vostok/" />
+    <meta name="yandex-verification" content="579eb67c46809d33" />
     <meta name="description" content="Интернет-магазин Инфокомвосток: продажа лазерных картриджей, чернил и принтеров Epson, Canon, HP в Донецке. Профессиональный ремонт и восстановление оргтехники.">
     <meta name="keywords" content="Инфокомвосток, infokomvostok, купить картридж Донецк, лазерные картриджи, чернила для принтера, ремонт принтеров Донецк, восстановление заправка картриджей, принтеры Epson Canon HP">
     <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Инфокомвосток — Картриджи и ремонт принтеров в Донецке">
+    <meta property="og:description" content="Расходные материалы, заправка картриджей и ремонт оргтехники. Быстро, качественно, с гарантией.">
+    <meta property="og:image" content="img/logo.png">
 
     <link rel="stylesheet" href="css/styles10.css">
     
@@ -63,20 +70,6 @@
     </style>
 </head>
 
-<!-- Yandex.Metrika counter 
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107061387', 'ym');
-
-    ym(107061387, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/107061387" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
 <body>
 <h1 class="seo-h1">Инфокомвосток — Расходные материалы, принтеры и ремонт оргтехники в Донецке</h1>
 
@@ -102,7 +95,6 @@
     let array0 = []; let array = []; let array1 = []; let array2 = []; 
     let currentUsername = "name";
 
-    // Функция для открытия окон поверх страницы (как в Корзине)
     function openModalWindow(url) {
         const width = 650;
         const height = 600;
@@ -148,9 +140,21 @@
         imgContainer.classList.add("img-container");
         var img = document.createElement("img");
         img.src = array1[index] || "default_image.png"; img.style.cursor = "pointer";
-        var text = document.createElement("p"); text.classList.add("text"); text.innerHTML = array[index]; 
-        var text1 = document.createElement("p"); text1.classList.add("text1"); text1.innerHTML = array2[index]; 
-        imgContainer.appendChild(img); container.appendChild(imgContainer); container.appendChild(text); container.appendChild(text1);
+        
+        // ВАЖНО для поиска из main.js: добавляем классы text и text1
+        var text = document.createElement("p"); 
+        text.classList.add("text"); 
+        text.innerHTML = array[index]; 
+        
+        var text1 = document.createElement("p"); 
+        text1.classList.add("text1"); 
+        text1.innerHTML = array2[index]; 
+        
+        imgContainer.appendChild(img); 
+        container.appendChild(imgContainer); 
+        container.appendChild(text); 
+        container.appendChild(text1);
+        
         img.addEventListener('click', function() {
             localStorage.setItem('containerContent', JSON.stringify({imgSrc: array1[index], text: array[index], text1: array2[index]}));
             localStorage.setItem('n', index);
@@ -202,31 +206,19 @@
     function openKorzina() { window.open('korzina.html', 'KorzinaWindow', 'width=600,height=500,left=200,top=100'); }
     function openCommentWindow() { window.open('comment.html', 'commentWindow', 'width=650,height=320,left=200,top=100'); }
 
-
-function loadMenuTexts() {
-    fetch('menu.json')
-        .then(response => response.json())
-        .then(menuTexts => {
-            // Обновляем текст Контактов по новому ID
-            const contactElem = document.getElementById("menuContactsLink");
-            if (contactElem && menuTexts.contacts) {
-                contactElem.textContent = menuTexts.contacts;
-            }
-
-            // Обновляем текст Услуг
-            const servicesElem = document.getElementById("menuServices");
-            if (servicesElem && menuTexts.services) {
-                servicesElem.textContent = menuTexts.services;
-            }
-
-            // Обновляем текст Блога
-            const blogElem = document.getElementById("menuBlog");
-            if (blogElem && menuTexts.blog) {
-                blogElem.textContent = menuTexts.blog;
-            }
-        })
-        .catch(error => console.error("Ошибка загрузки меню:", error));
-}
+    function loadMenuTexts() {
+        fetch('menu.json')
+            .then(response => response.json())
+            .then(menuTexts => {
+                const contactElem = document.getElementById("menuContactsLink");
+                if (contactElem && menuTexts.contacts) contactElem.textContent = menuTexts.contacts;
+                const servicesElem = document.getElementById("menuServices");
+                if (servicesElem && menuTexts.services) servicesElem.textContent = menuTexts.services;
+                const blogElem = document.getElementById("menuBlog");
+                if (blogElem && menuTexts.blog) blogElem.textContent = menuTexts.blog;
+            })
+            .catch(error => console.error("Ошибка загрузки меню:", error));
+    }
 </script>
 
 <header class="header">
@@ -276,32 +268,20 @@ function loadMenuTexts() {
 
     <div id="numberRow"></div>
     <div id="dynamicContainer"></div>
- <div class="header-row">
-    <div class="header-part">
-        <a href="#" id="menuContactsLink" onclick="openModalWindow('contact.html'); return false;">Контакты</a>
-    </div>
-    <div class="header-part opt">
-        <a href="#" id="menuServices" onclick="openModalWindow('chisla.html'); return false;">Услуги</a>
-    </div>
-    <div class="header-part opt">
-        <button id="menuBlog" onclick="openCommentWindow()">Блог</button>
-    </div>
-</div> 
-<!--    <div class="header-row">
+    <div class="header-row">
         <div class="header-part">
-            <a href="javascript:void(0)" id="menuContacts" onclick="openModalWindow('contact.html')">Контакты</a>
+            <a href="#" id="menuContactsLink" onclick="openModalWindow('contact.html'); return false;">Контакты</a>
         </div>
-    
         <div class="header-part opt">
-            <a href="javascript:void(0)" id="menuServices" onclick="openModalWindow('chisla.html')">Услуги</a>
+            <a href="#" id="menuServices" onclick="openModalWindow('chisla.html'); return false;">Услуги</a>
         </div>
-    
         <div class="header-part opt">
             <button id="menuBlog" onclick="openCommentWindow()">Блог</button>
         </div>
     </div>
-</div> -->
+</div> 
 </header>
+
 <footer style="margin-top: 50px; padding: 30px 20px; border-top: 1px solid #eee; text-align: center; background: #ffffff;">
     <div style="max-width: 800px; margin: 0 auto;">
         <p style="color: #333; font-size: 15px; font-weight: bold; margin-bottom: 10px;">
@@ -321,25 +301,17 @@ function loadMenuTexts() {
            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-           ym(XXXXXX, "init", {
+           ym(107061387, "init", {
                 clickmap:true,
                 trackLinks:true,
                 accurateTrackBounce:true,
-                webvisor:true
+                webvisor:true,
+                ecommerce:"dataLayer"
            });
         </script>
         <noscript><div><img src="https://mc.yandex.ru/watch/107061387" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-        </div>
-</footer>
-<!-- <footer style="margin-top: 50px; padding: 20px; border-top: 1px solid #ccc; text-align: center; background: #f9f9f9;">
-    <div style="max-width: 800px; margin: 0 auto; color: #666; font-size: 14px; line-height: 1.6;">
-        <p style="color: #666; font-size: 14px;">
-    Расходные материалы • Картриджи • Чернила • Ремонт принтеров • Обслуживание оргтехники в Донецке</p>
-        <p>&copy; 2026 Инфокомвосток — Сервисный центр и интернет-магазин расходных материалов.</p>
     </div>
-</footer>  -->
-
-<!-- <script src="//code.jivo.ru/widget/pPYBegWDhy" async></script> -->
+</footer>
 
 </body>
 </html>
